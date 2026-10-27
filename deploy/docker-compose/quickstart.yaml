@@ -19,8 +19,7 @@ services:
         condition: service_completed_successfully
     build: ../../backend
     ports:
-      - '8000:8000' # public
-      - '8001:8001' # admin
+      - '4602:8000' # public
     restart: unless-stopped
     command: serve --config /etc/config/config.yaml all
     volumes:
@@ -52,18 +51,18 @@ services:
   elements:
     build: ../../frontend
     ports:
-      - "9500:80"
+      - "4603:80"
     networks:
       - intranet
   quickstart:
     build: ../../quickstart
     ports:
-      - "8888:8080"
+      - "4601:8080"
     environment:
-      - HANKO_URL=http://localhost:8000
+      - HANKO_URL=http://localhost:4602
       - HANKO_URL_INTERNAL=http://hanko:8000
-      - HANKO_ELEMENT_URL=http://localhost:9500/elements.js
-      - HANKO_FRONTEND_SDK_URL=http://localhost:9500/sdk.modern.js
+      - HANKO_ELEMENT_URL=http://localhost:4603/elements.js
+      - HANKO_FRONTEND_SDK_URL=http://localhost:4603/sdk.modern.js
     networks:
       - intranet
   mailslurper:

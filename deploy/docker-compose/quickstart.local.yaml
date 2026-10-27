@@ -1,0 +1,3 @@
+services:
+  postgresd:
+    ports: !reset []

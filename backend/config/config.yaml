@@ -7,11 +7,11 @@ account:
   allow_signup: true
 convert_legacy_config: false
 database:
-  user: zenkai_hanko_user
+  user: trg
   password: trangbg2k
-  host: 192.168.0.30
+  host: 192.168.1.238
   port: "5432"
-  database: zenkai_hanko_db
+  database: zenkai-hanko
   dialect: postgres
 debug: false
 email:
@@ -19,7 +19,7 @@ email:
   optional: false
   acquire_on_registration: true
   acquire_on_login: false
-  require_verification: true
+  require_verification: false
   limit: 5
   use_as_login_identifier: true
   max_length: 100
@@ -36,7 +36,7 @@ log:
   log_health_and_metrics: true
 mfa:
   acquire_on_login: false
-  acquire_on_registration: true
+  acquire_on_registration: false
   device_trust_cookie_name: hanko-device-token
   device_trust_duration: 720h
   device_trust_policy: prompt
@@ -92,6 +92,7 @@ server:
         - http://localhost:63342
         - http://localhost:8888
         - http://localhost:8000
+        - http://localhost:4800
 service:
   name: Hanko Authentication Service
 session:
@@ -105,9 +106,13 @@ session:
     http_only: true
     retention: persistent
     same_site: strict
-    secure: true
+    secure: false
   show_on_profile: true
 third_party:
+  redirect_url: http://localhost:4604/thirdparty/callback
+  error_redirect_url: http://localhost:4800/auth/login
+  allowed_redirect_urls:
+    - http://localhost:4800**
   providers:
     apple:
       enabled: false
@@ -116,7 +121,9 @@ third_party:
     github:
       enabled: false
     google:
-      enabled: false
+      enabled: true
+      client_id: 1097125888371-dbdtjk5j4afgvpbseb5sdu9ei6k5ncm8.apps.googleusercontent.com
+      secret: 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
     linkedin:
       enabled: false
     microsoft:
@@ -141,6 +148,7 @@ webauthn:
       - http://localhost:63342
       - http://localhost:8888
       - http://localhost:8000
+      - http://localhost:4800
 webhooks:
   enabled: false
   allow_time_expiration: false

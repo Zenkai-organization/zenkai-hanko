@@ -5,7 +5,8 @@
   "workspaces": [
     "frontend-sdk",
     "elements",
-    "examples/*"
+    "examples/*",
+    "dashboard"
   ],
   "scripts": {
     "build": "turbo run build",

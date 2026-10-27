@@ -22,7 +22,7 @@ service:
 webauthn:
   relying_party:
     origins:
-      - "http://localhost:8888"
+      - "http://localhost:4601"
       - "http://localhost:3000"
       - "http://localhost:9999"
       - "http://localhost:3001"
@@ -33,20 +33,20 @@ server:
   public:
     cors:
       allow_origins:
-        - "http://localhost:8888"
+        - "http://localhost:4601"
         - "http://localhost:3000"
         - "http://localhost:9999"
         - "http://localhost:3001"
 third_party:
   # OAuth/OpenID connect callback URL for the IdP (Google/GitHub/...).
   # This is where the provider sends the auth code to Hanko.
-  redirect_url: "http://localhost:8000/thirdparty/callback"
+  redirect_url: "http://localhost:4602/thirdparty/callback"
   # Fallback UI location for errors (must be a page that embeds Hanko Elements).
-  error_redirect_url: "http://localhost:8888"
+  error_redirect_url: "http://localhost:4601"
   # Where Hanko is allowed to redirect the user after success or error.
   # Glob patterns are supported by the backend.
   allowed_redirect_urls:
-    - "http://localhost:8888**"
+    - "http://localhost:4601**"
     - "http://localhost:3000**"
     - "http://localhost:3001**"
     - "http://localhost:9001**"
